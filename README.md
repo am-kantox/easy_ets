@@ -1,4 +1,4 @@
-# NimbleETS
+# [![CircleCI](https://circleci.com/gh/am-kantox/nimble_ets.svg?style=svg)](https://circleci.com/gh/am-kantox/nimble_ets)    NimbleETS
 
 The very simple [`:ets`](http://erlang.org/doc/man/ets.html) wrapper simplifying
 cross-process [`:ets`](http://erlang.org/doc/man/ets.html) handling
