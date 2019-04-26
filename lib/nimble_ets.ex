@@ -3,6 +3,11 @@ defmodule NimbleETS do
   Documentation for NimbleETS.
   """
 
+  @doc """
+  Creates new ETS table(s) wrapper(s) based on definitions passed as a parameter.
+  """
+  defdelegate new(definitions), to: NimbleETS.Tables
+
   ##############################################################################
   # Meta (use NimbleETS)
   defmacro __using__(opts \\ []) do
@@ -57,9 +62,11 @@ defmodule NimbleETS do
             _ -> nil
           end
 
+        this = ets_del(key)
+
         case function.(value) do
-          :pop -> {value, ets_del(key) = this}
-          {^value, updated} -> {value, ets_put(key, updated) = this}
+          :pop -> {value, this}
+          {_, updated} -> {value, this = ets_put(key, updated)}
         end
       end
 
@@ -67,7 +74,7 @@ defmodule NimbleETS do
       @impl Access
       def pop(this, key) do
         case fetch(this, key) do
-          {:ok, value} -> {value, ets_del(key) = this}
+          {:ok, value} -> {value, this = ets_del(key)}
           _ -> {nil, this}
         end
       end

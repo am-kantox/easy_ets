@@ -10,6 +10,7 @@ defmodule NimbleETS.MixProject do
       app: @app,
       version: @version,
       elixir: "~> 1.7",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       package: package(),
       xref: [exclude: []],
@@ -68,4 +69,8 @@ defmodule NimbleETS.MixProject do
       ]
     ]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 end
