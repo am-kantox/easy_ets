@@ -47,7 +47,7 @@ defmodule NimbleETS do
       MyApp.MyModuleBackedByTable.ets_get(:foo)
       #⇒ 42
 
-  One might override `NimbleETS.ets_table_name/0` in the module to change
+  One might override `ets_table_name/0` in the module to change
   the name of the table.
 
   ### Interface exported
@@ -75,7 +75,7 @@ defmodule NimbleETS do
 
   Modules produced / updated by `NimbleETS` do support `Access` behaviour.
 
-  ### `Envío` support
+  ### [`Envío`](https://hexdocs.pm/envio) support
 
   Modules produced / updated by `NimbleETS` do send broadcast messages
   on both `:update` and `:delete` actions. See [`Envío`](https://hexdocs.pm/envio/envio.html#creating-a-subscriber) documentation on how to subscribe to them.
@@ -86,6 +86,14 @@ defmodule NimbleETS do
 
   @doc """
   Creates new ETS table(s) wrapper(s) based on definitions passed as a parameter.
+
+  _Examples:_
+
+      NimbleETS.new(MyApp.MyExistingModule)
+      NimbleETS.new([{MyApp.WithOptions, [:bag]}, MyApp.ToCreate])
+
+  For the full list of options please refer to
+  [`:ets.new/2`](http://erlang.org/doc/man/ets.html#new-2) documentation.
   """
   defdelegate new(definitions), to: NimbleETS.Tables
 

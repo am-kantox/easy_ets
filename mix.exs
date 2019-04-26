@@ -2,7 +2,7 @@ defmodule NimbleETS.MixProject do
   use Mix.Project
 
   @app :nimble_ets
-  @app_name Atom.to_string(@app)
+  # @app_name Atom.to_string(@app)
   @version "0.1.0"
 
   def project do
@@ -30,8 +30,9 @@ defmodule NimbleETS.MixProject do
 
   defp deps do
     [
-      {:envio, "~> 0.4"}
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:envio, "~> 0.4"},
+      {:credo, "~> 1.0", only: :dev},
+      {:ex_doc, "~> 0.20", only: :dev, override: true}
     ]
   end
 
@@ -56,13 +57,14 @@ defmodule NimbleETS.MixProject do
 
   defp docs() do
     [
-      main: @app_name,
+      # main: @app_name,
+      main: "NimbleETS",
       source_ref: "v#{@version}",
       canonical: "http://hexdocs.pm/#{@app}",
-      logo: "stuff/logo-48x48.png",
+      # logo: "stuff/logo-48x48.png",
       source_url: "https://github.com/am-kantox/#{@app}",
       extras: [
-        "stuff/#{@app}.md"
+        # "stuff/#{@app}.md"
       ],
       groups_for_modules: [
         # NimbleETS
