@@ -1,11 +1,15 @@
 defmodule NimbleETSTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest NimbleETS
+
+  import ExUnit.CaptureIO
+  use Envio.Subscriber, channels: [{NimbleETS.Envio, NimbleETS.Tables.Test.Baz}]
   alias NimbleETS.Tables.Test, as: T
 
   setup_all do
     NimbleETS.new(NimbleETS.Tables.Test.Foo)
     NimbleETS.new([{NimbleETS.Tables.Test.Bar, [:bag]}, NimbleETS.Tables.Test.Baz])
+
     :ok
   end
 
@@ -50,5 +54,21 @@ defmodule NimbleETSTest do
              end)
 
     assert get_in(input, [:foo, :bar, :baz]) == 42
+  end
+
+  test "Envío" do
+    output =
+      capture_io(fn ->
+        with {:ok, pid} <- NimbleETS.Listeners.Test.Baz.start_link() do
+          T.Baz.ets_put(:baz, 42)
+          T.Baz.ets_del(:baz)
+          # to allow message delivery delay
+          Process.sleep(100)
+          GenServer.stop(pid)
+        end
+      end)
+
+    assert output =~ ~r/%{action: :update, key: :baz, value: 42}/
+    assert output =~ ~r/%{action: :delete, key: :baz}/
   end
 end
