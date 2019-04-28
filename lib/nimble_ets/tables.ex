@@ -1,4 +1,4 @@
-defmodule NimbleETS.Tables do
+defmodule EasyETS.Tables do
   @moduledoc false
   use GenServer
 
@@ -99,7 +99,7 @@ defmodule NimbleETS.Tables do
     end)
     |> Enum.map(fn {t, opts} ->
       unless Code.ensure_loaded?(t),
-        do: Module.create(t, quote(do: use(NimbleETS)), Macro.Env.location(__ENV__))
+        do: Module.create(t, quote(do: use(EasyETS)), Macro.Env.location(__ENV__))
 
       {t, opts}
     end)

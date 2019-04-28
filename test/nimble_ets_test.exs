@@ -1,22 +1,22 @@
-defmodule NimbleETSTest do
+defmodule EasyETSTest do
   use ExUnit.Case, async: true
-  doctest NimbleETS
+  doctest EasyETS
 
   import ExUnit.CaptureIO
-  use Envio.Subscriber, channels: [{NimbleETS.Envio, NimbleETS.Tables.Test.Baz}]
-  alias NimbleETS.Tables.Test, as: T
+  use Envio.Subscriber, channels: [{EasyETS.Envio, EasyETS.Tables.Test.Baz}]
+  alias EasyETS.Tables.Test, as: T
 
   setup_all do
-    NimbleETS.new(NimbleETS.Tables.Test.Foo)
-    NimbleETS.new([{NimbleETS.Tables.Test.Bar, [:bag]}, NimbleETS.Tables.Test.Baz])
+    EasyETS.new(EasyETS.Tables.Test.Foo)
+    EasyETS.new([{EasyETS.Tables.Test.Bar, [:bag]}, EasyETS.Tables.Test.Baz])
 
     :ok
   end
 
-  test "NimbleETS.new/1" do
-    assert :ets.info(NimbleETS.Tables.Test.Foo)[:type] == :set
-    assert :ets.info(NimbleETS.Tables.Test.Bar)[:type] == :bag
-    assert :ets.info(NimbleETS.Tables.Test.Baz)[:type] == :set
+  test "EasyETS.new/1" do
+    assert :ets.info(EasyETS.Tables.Test.Foo)[:type] == :set
+    assert :ets.info(EasyETS.Tables.Test.Bar)[:type] == :bag
+    assert :ets.info(EasyETS.Tables.Test.Baz)[:type] == :set
   end
 
   test "CRUD" do
@@ -27,9 +27,9 @@ defmodule NimbleETSTest do
     assert :value == T.Foo.ets_get(:key)
     assert Enum.member?(T.Foo.ets_all(), :value)
 
-    assert %T.Foo{table: NimbleETS.Tables.Test.Foo} == T.Foo.ets_del(:inexisting)
+    assert %T.Foo{table: EasyETS.Tables.Test.Foo} == T.Foo.ets_del(:inexisting)
     assert :value == T.Foo.ets_get(:key)
-    assert %T.Foo{table: NimbleETS.Tables.Test.Foo} == T.Foo.ets_del(:key)
+    assert %T.Foo{table: EasyETS.Tables.Test.Foo} == T.Foo.ets_del(:key)
     refute Enum.member?(T.Foo.ets_all(), :value)
 
     T.Foo.ets_put(:dup, 1)
@@ -59,7 +59,7 @@ defmodule NimbleETSTest do
   test "Envío" do
     output =
       capture_io(fn ->
-        with {:ok, pid} <- NimbleETS.Listeners.Test.Baz.start_link() do
+        with {:ok, pid} <- EasyETS.Listeners.Test.Baz.start_link() do
           T.Baz.ets_put(:baz, 42)
           T.Baz.ets_del(:baz)
           # to allow message delivery delay

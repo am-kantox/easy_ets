@@ -1,4 +1,4 @@
-defmodule NimbleETS.MixProject do
+defmodule EasyETS.MixProject do
   use Mix.Project
 
   @app :nimble_ets
@@ -24,7 +24,7 @@ defmodule NimbleETS.MixProject do
   def application do
     [
       extra_applications: [:logger, :envio],
-      mod: {NimbleETS.Application, []}
+      mod: {EasyETS.Application, []}
     ]
   end
 
@@ -58,7 +58,7 @@ defmodule NimbleETS.MixProject do
   defp docs() do
     [
       # main: @app_name,
-      main: "NimbleETS",
+      main: "EasyETS",
       source_ref: "v#{@version}",
       canonical: "http://hexdocs.pm/#{@app}",
       # logo: "stuff/logo-48x48.png",
@@ -67,7 +67,7 @@ defmodule NimbleETS.MixProject do
         # "stuff/#{@app}.md"
       ],
       groups_for_modules: [
-        # NimbleETS
+        # EasyETS
       ]
     ]
   end

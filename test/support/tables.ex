@@ -1,7 +1,7 @@
-defmodule NimbleETS.Tables.Test.Foo do
-  use NimbleETS
+defmodule EasyETS.Tables.Test.Foo do
+  use EasyETS
 end
 
-defmodule NimbleETS.Tables.Test.Bar do
-  use NimbleETS
+defmodule EasyETS.Tables.Test.Bar do
+  use EasyETS
 end
