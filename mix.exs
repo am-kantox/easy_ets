@@ -1,7 +1,7 @@
 defmodule EasyETS.MixProject do
   use Mix.Project
 
-  @app :nimble_ets
+  @app :easy_ets
   # @app_name Atom.to_string(@app)
   @version "0.1.0"
 

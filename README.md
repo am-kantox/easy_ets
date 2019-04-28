@@ -1,4 +1,4 @@
-# [![CircleCI](https://circleci.com/gh/am-kantox/nimble_ets.svg?style=svg)](https://circleci.com/gh/am-kantox/nimble_ets)    EasyETS
+# [![CircleCI](https://circleci.com/gh/am-kantox/easy_ets.svg?style=svg)](https://circleci.com/gh/am-kantox/easy_ets)    EasyETS
 
 The very simple [`:ets`](http://erlang.org/doc/man/ets.html) wrapper simplifying
 cross-process [`:ets`](http://erlang.org/doc/man/ets.html) handling
@@ -94,10 +94,10 @@ and the channel with the name equal to the name of the table updated.
 ```elixir
 def deps do
   [
-    {:nimble_ets, "~> 0.1"}
+    {:easy_ets, "~> 0.1"}
   ]
 end
 ```
 
-## [Documentation](https://hexdocs.pm/nimble_ets).
+## [Documentation](https://hexdocs.pm/easy_ets).
 
