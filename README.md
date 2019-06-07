@@ -81,10 +81,10 @@ The latter holds the reference to the respective `:ets` table.
 
 Modules produced / updated by `EasyETS` do support `Access` behaviour.
 
-## `Envío` support
+## `Env́io` support
 
 Modules produced / updated by `EasyETS` do send broadcast messages
-on both `:update` and `:delete` actions. See [`Envío`](https://hexdocs.pm/envio/envio.html#creating-a-subscriber) documentation on how to subscribe to them.
+on both `:update` and `:delete` actions. See [`Env́io`](https://hexdocs.pm/envio/envio.html#creating-a-subscriber) documentation on how to subscribe to them.
 
 Each message is sent to two channels: `:all` (all the updates managed by `NimbleCSV`)
 and the channel with the name equal to the name of the table updated.
